@@ -1,26 +1,32 @@
-# Docker Project Container with PHP 8+ and Apache
+# Docker - Project Container with PHP 8+ and Apache
 
 [![CircleCI](https://circleci.com/gh/adrian-gheorghe/docker-setup.svg?style=svg)](https://circleci.com/gh/adrian-gheorghe/docker-setup)
 
-## Dockerfile 
+## Introduction
 
-This file containes all the php extension and configurations.
+This repository provides a Docker setup for a project container featuring PHP 8+ and Apache. The provided Dockerfile includes necessary PHP extensions and configurations to create an environment suitable for hosting PHP-based projects.
 
-## Project Container Commands 
+## Dockerfile
 
-**Build container commands:**
+The `Dockerfile` in this repository contains all the PHP extensions and configurations required for the project container.
+
+## Project Container Management
+
+To manage the project container, the following commands are available:
+
+**Build container:**
 
 ```bash
 bin/build
 ```
 
-**Start all container commands:**
+**Start container:**
 
 ```bash
 bin/start
 ```
 
-**Stop all container commands:**
+**Stop container:**
 
 ```bash
 bin/stop
@@ -28,24 +34,32 @@ bin/stop
 
 ## Project Folder Location
 
-Laravel project must be in `src` folder by default. You can change it from `docker-composer.yml` file.
+By default, the Laravel project must be placed in the `src` folder. You have the flexibility to modify this location by editing the `docker-compose.yml` file.
 
-## Enter In Project Container
+## Accessing the Project Container
+
+To enter the project container's shell environment, use the following command:
 
 ```bash
 bin/shell
 ```
 
-## Registering The SSL Certificates
+## Registering SSL Certificates
 
-You must to run command from `WebServer` directory and must include all the apps, because they use one certificate.
+When working with SSL certificates, follow these steps:
 
-```
-mkcert -cert-file ./docker_files/cert -key-file ./docker_files/cert-key portainer.localhost traefik.localhost 
-```
+1. Navigate to the `WebServer` directory where your project is located.
 
-Then you need to add all the apps addresses `app1.localhost`, `app2.localhost`, etc.
+2. Generate SSL certificates with the following command. Include all the app addresses that will use the certificate:
 
-```
-mkcert -cert-file ./docker_files/cert -key-file ./docker_files/cert-key portainer.localhost traefik.localhost  app1.localhost app2.localhost
-```
+   ```bash
+   mkcert -cert-file ./docker_files/cert -key-file ./docker_files/cert-key portainer.localhost traefik.localhost app1.localhost app2.localhost
+   ```
+
+   Make sure to replace `app1.localhost` and `app2.localhost` with the actual addresses of your apps.
+
+3. After generating the certificates, update your app configurations to use these SSL certificates for secure communication.
+
+## Acknowledgments
+
+This Docker setup streamlines the process of creating a project container with PHP 8+ and Apache. By providing a standardized environment, it helps developers focus on their projects without worrying about the underlying infrastructure.
